@@ -9,6 +9,10 @@ dependencies = [
     "numpy>=2.4.1",
     "pandas>=2.3.3",
     "python-multipart>=0.0.21",
+    "requests>=2.32.5",
     "scikit-learn>=1.8.0",
+    "streamlit>=1.53.0",
     "uvicorn>=0.40.0",
 ]
+[project.scripts]
+dev = "scripts.dev:main"

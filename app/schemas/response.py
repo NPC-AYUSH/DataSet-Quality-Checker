@@ -34,6 +34,8 @@ class AnalysisResponse(BaseModel):
     anomalies: AnomalyReport
     quality_score: QualityScore
     suggestions: Suggestions
+    dataset_id: str
+
 
 
 

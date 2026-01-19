@@ -6,6 +6,8 @@ from app.schemas.response import AnalysisResponse
 from app.core.anomaly import detect_anomalies
 from app.core.scorer import compute_quality_score   
 from app.core.suggestions import generate_suggestions
+from app.core.cleaner import clean_dataset
+from app.utils.storage import save_dataset
 
 
 
@@ -36,6 +38,8 @@ async def analyze_dataset(file: UploadFile = File(...)):
         duplicate_ratio=quality["duplicate_ratio"],
         anomaly_ratio=anomaly_ratio
     )
+    cleaned_df = clean_dataset(df)
+    dataset_id = save_dataset(cleaned_df)
 
     return {
         "filename": file.filename,
@@ -43,5 +47,6 @@ async def analyze_dataset(file: UploadFile = File(...)):
         "quality": quality,
         "anomalies": anomalies,
         "quality_score": quality_score,
-        "suggestions": {"recommendations": suggestions}
+        "suggestions": {"recommendations": suggestions},
+        "dataset_id": dataset_id
     }
